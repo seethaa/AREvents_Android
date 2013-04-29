@@ -14,30 +14,61 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 public class MainActivity extends Activity implements OnClickListener {
 	
 	private String callURL = "http://api.eventful.com/json/events/search?app_key=test_key&location=San+Diego&sort_order=popularity&include=categories";
+
+	private RadioButton distanceButton;
+	private RadioButton timeButton;
+	
 @Override
 	public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
-	setContentView(R.layout.activity_main);
-	findViewById(R.id.my_button).setOnClickListener(this);
+	setContentView(R.layout.filter_screen);
+	
+	// find the radiobutton by returned id
+	 RadioGroup rDistanceGroup = (RadioGroup) this.findViewById(R.id.radioDistanceGroup);
+     int distId = rDistanceGroup.getCheckedRadioButtonId(); 
+	 distanceButton = (RadioButton) findViewById(distId);
+	        
+	 RadioGroup rTimeGroup = (RadioGroup) this.findViewById(R.id.radioTimeGroup);
+	 int timeId = rTimeGroup.getCheckedRadioButtonId();
+	 timeButton = (RadioButton) findViewById(timeId);
+
+     
+     EditText locationText = (EditText) this.findViewById(R.id.locationText);
+     locationText.setOnClickListener(curr_location_listen);  
+     
+     findViewById(R.id.searchButton).setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View arg0) {
-	Button b = (Button)findViewById(R.id.my_button);
-	b.setClickable(false);
+	Button searchB = (Button)findViewById(R.id.searchButton);
+	searchB.setClickable(false);
 	new LongRunningGetIO().execute();
 	}
 
+	 private OnClickListener curr_location_listen = new OnClickListener(){
+	    	@Override
+	    	public void onClick(View v) {
+	    
+		        	Intent intent = new Intent(MainActivity.this, TakePhoto.class); 
+		        	startActivity(intent);
+
+	        }
+	    };
 
 private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 	protected String getASCIIContentFromEntity(HttpEntity entity) throws IllegalStateException, IOException {
@@ -68,11 +99,13 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 	}
 	protected void onPostExecute(String results) {
 	if (results!=null) {
-		EditText et = (EditText)findViewById(R.id.my_edit);
+		
+		//DECIDE WHAT TO DO WITH TEXT HERE!! 
+		EditText et = (EditText)findViewById(R.id.locationText);
 		et.setText(results);
 	}
-	Button b = (Button)findViewById(R.id.my_button);
-	b.setClickable(true);
+	Button searchB = (Button)findViewById(R.id.searchButton);
+	searchB.setClickable(true);
 	}
 }
 }
