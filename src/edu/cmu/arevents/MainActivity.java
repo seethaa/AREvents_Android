@@ -23,7 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 public class MainActivity extends Activity implements OnClickListener {
 	
-	private String callURL = "http://api.eventful.com/rest/events/search?app_key=test_key&location=San+Diego&sort_order=popularity&include=categories";
+	private String callURL = "http://api.eventful.com/json/events/search?app_key=test_key&location=San+Diego&sort_order=popularity&include=categories";
 @Override
 	public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -76,6 +76,12 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 	}
 }
 }
+
+
+
+
+
+
 //http://api.eventful.com/rest/events/search?app_key=test_key&location=San+Diego&sort_order=popularity&include=categories
 //	
 //	
