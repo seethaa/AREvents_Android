@@ -2,13 +2,13 @@ package edu.cmu.arevents;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +35,11 @@ public class EventResultList extends Activity {
 		 static final String TAG_CITY = "city_name";
 		 static final String TAG_IMAGE = "image";
 
+		 static String title;
+		 static String addr;
+		 static String st_time;
+		 static String descr;
+		 
 		ListView list;
 	    LazyAdapter adapter;
 		 
@@ -84,12 +89,51 @@ public class EventResultList extends Activity {
 	        			String name = nameView.getText().toString();
 	        			
 	        			HashMap<String, String> n2 = eventList.get(position);
+	        			String details = "";
 	        			
 	        			for (String key : n2.keySet()) {
 	        				   System.out.println("------------------------------------------------");
-	        				   System.out.println("Iterating or looping map using java5 foreach loop");
 	        				   System.out.println("key: " + key + " value: " + n2.get(key));
-	   	        	   		//Toast.makeText(getApplicationContext(), lat +", " + lon, Toast.LENGTH_LONG).show();
+	        			
+	   	        	Intent intent = new Intent(EventResultList.this, EventInfoActivity.class);
+	   	        	Bundle mBundle = new Bundle();
+	   	        	
+	   	        	
+	   	        	
+	   	        			if (key.equalsIgnoreCase("title")){
+	   	        				details = details + "title: " +n2.get(key) + ", ";
+	   	        				 title = n2.get(key)+"";
+	   	        				
+	   	        				intent.putExtra("title", title);
+	   	        				mBundle.putString("title", title);
+	   	        				
+	   	        			}
+	   	        			if (key.equalsIgnoreCase("venue_address")){
+	   	        				details = details + "address: " +n2.get(key) + ", ";
+	   	        				 addr =n2.get(key)+"";
+	   	        				intent.putExtra("address",addr);
+	   	        				mBundle.putString("address",addr);
+	   	        			}
+	   	        			if (key.equalsIgnoreCase("description")){
+	   	        				descr = n2.get(key)+"";
+	   	        				details = details + "descr: " +n2.get(key) + ", ";
+//	   	        				intent.putExtra("description",n2.get(key));
+	   	        			}
+	   	        			if (key.equalsIgnoreCase("start_time")){
+	   	        				details = details + "start: " +n2.get(key) + ", ";
+	   	        				 st_time = n2.get(key) +"";
+	   	        				intent.putExtra("start_time", st_time);
+	   	        				mBundle.putString("start_time", st_time);
+	   	        			}
+	   	        			//mBundle.putString("details", details);
+	   	        			
+
+	   	        			intent.putExtra("details", details);
+	   	        			//intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+	   	        			startActivity(intent);
+	        				   
+	   	        	   		//Toast.makeText(getApplicationContext(), details, Toast.LENGTH_LONG).show();
 
 	        			}
 
@@ -112,11 +156,7 @@ public class EventResultList extends Activity {
 	        			     
 	        			
 	        			
-//	        			Intent newActivity = new Intent(EventResultList.this, EventInfoActivity.class);     
-//	        			intent.putExtra("full_json_string",full_json_string);
-//	        			Object s = list.getItemAtPosition(position);
-//	        			
-//	        			startActivity(newActivity);
+
 	        			
 
 	        		}
@@ -127,6 +167,11 @@ public class EventResultList extends Activity {
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
  
     @Override
 	protected void onResume()
