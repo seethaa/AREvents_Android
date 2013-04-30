@@ -72,9 +72,12 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 	private double s_lat = 0.0;
 	private double s_long = 0.0;
 	private String s_keyword = "";
-	private int s_within = 5;
-	private String date = "This+Week";
-	private String category = "";
+	private String s_within = "5";
+	private String s_date = "This+Week";
+	private String s_category = "";
+	private EditText keywordText;
+	private RadioGroup rDistanceGroup;
+	private RadioGroup rTimeGroup;
 	
 @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -82,20 +85,17 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 	setContentView(R.layout.filter_screen);
 	
 	// find the radiobutton by returned id
-	 RadioGroup rDistanceGroup = (RadioGroup) this.findViewById(R.id.radioDistanceGroup);
-     int distId = rDistanceGroup.getCheckedRadioButtonId(); 
-	 distanceButton = (RadioButton) findViewById(distId);
-	        
-	 RadioGroup rTimeGroup = (RadioGroup) this.findViewById(R.id.radioTimeGroup);
-	 int timeId = rTimeGroup.getCheckedRadioButtonId();
-	 timeButton = (RadioButton) findViewById(timeId);
+	 rDistanceGroup = (RadioGroup) this.findViewById(R.id.radioDistanceGroup);
+     
+	
+	 rTimeGroup = (RadioGroup) this.findViewById(R.id.radioTimeGroup);
 
      
      EditText locationText = (EditText) this.findViewById(R.id.locationText);
      //locationText.setOnClickListener(curr_location_listen);  
      
-     EditText keywordText = (EditText) this.findViewById(R.id.keywordText);
-     keywordText.setOnClickListener(keyword_listen); 
+     keywordText = (EditText) this.findViewById(R.id.keywordText);
+     //keywordText.setOnClickListener(keyword_listen); 
      
      
 //     Button searchButton = (Button) this.findViewById(R.id.searchButton);
@@ -142,57 +142,40 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 	public void onClick(View arg0) {
 	Button searchB = (Button)findViewById(R.id.searchButton);
 	searchB.setClickable(false);
+	
+	s_keyword = keywordText.getText().toString();
+	
+	
+	RadioGroup rg=(RadioGroup)findViewById(R.id.radioDistanceGroup);
+	RadioButton b_within =  (RadioButton)this.findViewById(rg.getCheckedRadioButtonId());
+	s_within = b_within.getText().toString();
+	
+	RadioGroup rg2=(RadioGroup)findViewById(R.id.radioTimeGroup);
+	RadioButton b_date =  (RadioButton)this.findViewById(rg2.getCheckedRadioButtonId());
+	s_date = b_date.getText().toString();
+	
+//	int distId = rDistanceGroup.getCheckedRadioButtonId(); 
+//	distanceButton = (RadioButton) findViewById(distId);
+//	s_within = (String) distanceButton.getText();
+//	
+//	 int timeId = rTimeGroup.getCheckedRadioButtonId();
+//	 timeButton = (RadioButton) findViewById(timeId);
+//	 s_date = (String) timeButton.getText();
+	 
+	 if (s_date.equalsIgnoreCase("This Week")){
+		 s_date = "This+Week";
+	 }else if (s_date.equalsIgnoreCase("This Month")){
+		 s_date = "This+Month";
+	 }else if (s_date.equalsIgnoreCase("Today")){
+		 s_date = "Today";
+	 }
+	 
+	 System.out.println("distance and date: "+s_within + ","+ s_date);
+	//s_category = 
+			
 	new LongRunningGetIO().execute();
 	}
 
-	 /*private OnClickListener search_button_listen = new OnClickListener(){
-	    	@Override
-	    	public void onClick(View v) {
-	    
-	    		// Creating JSON Parser instance
-	    		JSONParser jParser = new JSONParser();
-	    		 
-	    		// getting JSON string from URL
-	    		json = jParser.getJSONFromUrl(callURL);
-	    		
-	    		String jsonstring = json.toString();
-	    		Log.d("JSON PARSER: ", jsonstring);
-	    		
-	        	Toast.makeText(getApplicationContext(), jsonstring, Toast.LENGTH_LONG).show();
-
-	    		 
-	    		try {
-	    		    // Getting Array of Contacts
-	    		    events = json.getJSONArray(TAG_EVENT);
-	    		     
-	    		    // looping through All Contacts
-	    		    for(int i = 0; i < events.length(); i++){
-	    		        JSONObject c = events.getJSONObject(i);
-	    		         
-	    		       
-	    		        // Storing each json item in variable
-	    		        String start_time = c.getString(TAG_STARTTIME);
-	    		        String latitude = c.getString(TAG_LAT);
-	    		        String longitude = c.getString(TAG_LONG);
-	    		        String address = c.getString(TAG_ADDRESS);
-	    		        String title = c.getString(TAG_TITLE);
-	    		        String description = c.getString(TAG_DESCRIPTION);
-	    		        String city = c.getString(TAG_CITY);
-	    		         
-	    		        // Phone number is agin JSON Object
-	    		        JSONObject image = c.getJSONObject(TAG_IMAGE);
-	    		        //String mobile = phone.getString(TAG_PHONE_MOBILE);
-//	    		        String home = phone.getString(TAG_PHONE_HOME);
-//	    		        String office = phone.getString(TAG_PHONE_OFFICE);
-	    		         
-	    		    }
-	    		} catch (JSONException e) {
-	    		    e.printStackTrace();
-	    		}
-	        }
-	    };
-	    
-	    */
 	    
 	 private OnClickListener curr_location_listen = new OnClickListener(){
 	    	@Override
@@ -204,15 +187,14 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 	        }
 	    };
 
-	private OnClickListener keyword_listen = new OnClickListener(){
-		    	@Override
-		    	public void onClick(View v) {
-		    
-			        	//Intent intent = new Intent(MainActivity.this, TakePhoto.class); 
-			        	//startActivity(intent);
-
-		        }
-		    };  
+//	private OnClickListener keyword_listen = new OnClickListener(){
+//		    	@Override
+//		    	public void onClick(View v) {
+//
+//			        s_keyword=  keywordText.getText().toString();
+//			        System.out.println("got to keyword_listen and s_keyword is : "+s_keyword);
+//		        }
+//		    };  
 		    
 		    
 private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
@@ -234,11 +216,14 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		
 		callURL = "http://api.eventful.com/json/events/search?app_key=test_key" +
 				"&where="+s_lat +","+s_long+
-				"&keywords=concert" +
-				"&within=5" +
-				"&date=This+Week" +
+				"&keywords=" + s_keyword +
+				"&within=" +s_within+
+				"&date=" +s_date +
 				"&category=performing_arts";
 
+		System.out.println("URL being used: " + callURL);
+		Log.d("URL being used: ", callURL);
+		
 		HttpGet httpGet = new HttpGet(callURL);
 		String text = null;
 		try {
@@ -269,12 +254,21 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		}
 		
 		String jsonstring = json.toString();
-		//Log.d("JSON PARSER: ", jsonstring);
+		Log.d("JSON PARSER: ", jsonstring);
+		
+		Toast.makeText(getApplicationContext(), jsonstring, Toast.LENGTH_LONG).show();
 		
 		
 		int startIndex = jsonstring.indexOf("{\"event\"");
-    	jsonstring = jsonstring.substring(startIndex, jsonstring.length()-1);
-    	//Toast.makeText(getApplicationContext(), jsonstring, Toast.LENGTH_LONG).show();
+		
+		if (startIndex!= -1){
+			jsonstring = jsonstring.substring(startIndex, jsonstring.length()-1);
+		}
+		else{
+			jsonstring = "";
+		}
+		
+		//Toast.makeText(getApplicationContext(), jsonstring, Toast.LENGTH_LONG).show();
     	
     	Log.d("JSON PARSER: ", jsonstring);
 		
@@ -317,6 +311,8 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		         
 		    }
 		} catch (JSONException e) {
+	   		Toast.makeText(getApplicationContext(), "No Events found with this criteria!", Toast.LENGTH_LONG).show();
+
 		    e.printStackTrace();
 		}
 		

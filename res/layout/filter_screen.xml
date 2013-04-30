@@ -99,26 +99,26 @@
                 android:layout_height="wrap_content" >
 
                 <RadioButton
-                    android:id="@+id/today"
+                    android:id="@+id/oneMile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1mi" />
 
                 <RadioButton
-                    android:id="@+id/thisMonth"
+                    android:id="@+id/fiveMile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="5mi" />
 
                 <RadioButton
-                android:id="@+id/thisMonth"
+                android:id="@+id/tenMile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10mi" />
 
             	<RadioButton
-                android:id="@+id/thisMonth"
+                android:id="@+id/twentyMile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20mi" />
@@ -168,7 +168,7 @@
                     android:text="Today" />
 
                 <RadioButton
-                    android:id="@+id/thisMonth"
+                    android:id="@+id/thisWeek"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
