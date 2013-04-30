@@ -79,12 +79,12 @@ public class LazyAdapter extends ArrayAdapter<HashMap<String, String>> {
     
 
 	private void setActiveOrdersTab( HashMap<String, String> item, TextView name,TextView address, TextView highestBid, ImageView thumb_image ) {
-    	Log.d("TAG", "NAME: " +item.get(ActiveBidsActivity.TAG_TITLE));
-        name.setText(item.get(ActiveBidsActivity.TAG_TITLE));
+    	Log.d("TAG", "NAME: " +item.get(EventResultList.TAG_TITLE));
+        name.setText(item.get(EventResultList.TAG_TITLE));
         
-        Log.d("TAG", "address: " +item.get(ActiveBidsActivity.TAG_ADDRESS));
+        Log.d("TAG", "address: " +item.get(EventResultList.TAG_ADDRESS));
        // address.setText(item.get(ActiveBidsActivity.KEY_address));
-        String addr = item.get(ActiveBidsActivity.TAG_ADDRESS);
+        String addr = item.get(EventResultList.TAG_ADDRESS);
       
         address.setText(addr);
       

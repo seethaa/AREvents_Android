@@ -19,7 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class ActiveBidsActivity extends Activity {
+public class EventResultList extends Activity {
 	static final String TAG = "MACCHA";
 	private ArrayList<String> itemsToAdd;
 	private  ArrayList<HashMap<String, String>> eventList;
@@ -47,7 +47,7 @@ public class ActiveBidsActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     
-        setContentView(R.layout.activity_active_bids);
+        setContentView(R.layout.result_events_list);
         
         Log.d("TAG", "I got to first active bids activity..");
         addedNames = new ArrayList<String>();

@@ -15,7 +15,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,9 +31,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends Activity implements OnClickListener, LocationListener {
 	
-	private String callURL = "http://api.eventful.com/json/events/search?app_key=test_key&where=37.785834,-122.406417&keywords=concert&within=5&date=This+Week&category=performing_arts";
+	//private String callURL = "http://api.eventful.com/json/events/search?app_key=test_key&where=37.785834,-122.406417&keywords=concert&within=5&date=This+Week&category=performing_arts";
+	
 	
 			//"http://api.eventful.com/json/events/search?app_key=test_key&location=San+Diego&sort_order=popularity&include=categories";
 	// url to make request
@@ -58,6 +64,18 @@ public class MainActivity extends Activity implements OnClickListener {
 	private RadioButton distanceButton;
 	private RadioButton timeButton;
 	
+	//variables to get current location
+	LocationManager LC;
+	private String provider; 
+
+	private String callURL = null;
+	private double s_lat = 0.0;
+	private double s_long = 0.0;
+	private String s_keyword = "";
+	private int s_within = 5;
+	private String date = "This+Week";
+	private String category = "";
+	
 @Override
 	public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
@@ -74,7 +92,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
      
      EditText locationText = (EditText) this.findViewById(R.id.locationText);
-     locationText.setOnClickListener(curr_location_listen);  
+     //locationText.setOnClickListener(curr_location_listen);  
      
      EditText keywordText = (EditText) this.findViewById(R.id.keywordText);
      keywordText.setOnClickListener(keyword_listen); 
@@ -84,7 +102,41 @@ public class MainActivity extends Activity implements OnClickListener {
 //     searchButton.setOnClickListener(search_button_listen); 
      
      findViewById(R.id.searchButton).setOnClickListener(this);
+     
+     
+     //get location details:
+     LC =(LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+     Criteria criteria=new Criteria();
+     provider=LC.getBestProvider(criteria, false);
+             Location loc=LC.getLastKnownLocation(provider);
+     if (loc!=null){
+    	 onLocationChanged(loc);
+     }
+     else{
+    	 Log.d("LOCATION: ", "No Provider");
+     }
+             
 	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+	   double lat=(double) (location.getLatitude());
+	   double lon=(double) (location.getLongitude());
+	   
+	   s_lat = lat;
+	   s_long = lon;
+	   
+	   EditText locationText = (EditText) this.findViewById(R.id.locationText);
+	   locationText.setText(lat +", " + lon);
+	   
+	   Log.d("LOCATION: ", lat +", " + lon);
+   		Toast.makeText(getApplicationContext(), lat +", " + lon, Toast.LENGTH_LONG).show();
+
+//	                latitudeval.setText(String.valueOf(lat));
+//	                longitudeval.setText(String.valueOf(lon));
+	}
+
 
 	@Override
 	public void onClick(View arg0) {
@@ -179,6 +231,14 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 	protected String doInBackground(Void... params) {
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpContext localContext = new BasicHttpContext();
+		
+		callURL = "http://api.eventful.com/json/events/search?app_key=test_key" +
+				"&where="+s_lat +","+s_long+
+				"&keywords=concert" +
+				"&within=5" +
+				"&date=This+Week" +
+				"&category=performing_arts";
+
 		HttpGet httpGet = new HttpGet(callURL);
 		String text = null;
 		try {
@@ -209,12 +269,12 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		}
 		
 		String jsonstring = json.toString();
-		Log.d("JSON PARSER: ", jsonstring);
+		//Log.d("JSON PARSER: ", jsonstring);
 		
 		
 		int startIndex = jsonstring.indexOf("{\"event\"");
     	jsonstring = jsonstring.substring(startIndex, jsonstring.length()-1);
-    	Toast.makeText(getApplicationContext(), jsonstring, Toast.LENGTH_LONG).show();
+    	//Toast.makeText(getApplicationContext(), jsonstring, Toast.LENGTH_LONG).show();
     	
     	Log.d("JSON PARSER: ", jsonstring);
 		
@@ -229,7 +289,7 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 			boolean hasEvents = json.has("event");
 	    	
 	    	
-	    	Toast.makeText(getApplicationContext(), "event: "+hasEvents, Toast.LENGTH_LONG).show();
+	    	//Toast.makeText(getApplicationContext(), "event: "+hasEvents, Toast.LENGTH_LONG).show();
 
 		    // Getting Array of Contacts
 		    events = json.getJSONArray(TAG_EVENT);
@@ -261,7 +321,7 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		}
 		
 		
-		Intent intent = new Intent(MainActivity.this, ActiveBidsActivity.class); 
+		Intent intent = new Intent(MainActivity.this, EventResultList.class); 
 		intent.putExtra("full_json_string",full_json_string);
     	startActivity(intent);
     	
@@ -280,6 +340,24 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 
 	public static JSONObject getJSONObject(){
 		return MainActivity.json;
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		Log.d("LOCATION: ", "provider disabled");
+
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		Log.d("LOCATION: ", "provider enabled");
+		
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 
