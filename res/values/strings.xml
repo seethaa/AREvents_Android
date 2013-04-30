@@ -5,4 +5,32 @@
     <string name="menu_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 
+    <string-array name="category_arrays">
+        <item>Concerts and Tour Dates</item>
+        <item>Concerts and Tradeshows</item>
+        <item>Education</item>
+        <item>Kids and Family</item>
+        <item>Festivals</item>
+        <item>Film</item>
+        <item>Food and Wine</item>
+        <item>Fundraising and Charity</item>
+        <item>Art Galleries and Exhibits</item>
+        <item>Health and Wellness</item>
+        <item>Library and books</item>
+        <item>Museums and Atractions</item>
+        <item>Neighborhood</item>
+        <item>Business and Networking</item>
+        <item>Nightlife and Singles</item>
+        <item>University and Alumni</item>
+        <item>Organizations and Meetups</item>
+        <item>Outdoors and Recreation</item>
+        <item>Performing Arts</item>
+        <item>Pets</item>
+        <item>Nightlife and Singles</item>
+        <item>University and Alumni</item>
+        <item>Organizations and Meetups</item>
+        <item>Outdoors and Recreation</item>
+        <item>Performing Arts</item>
+    </string-array>
+    
 </resources>
