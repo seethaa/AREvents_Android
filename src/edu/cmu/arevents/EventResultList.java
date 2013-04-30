@@ -2,22 +2,21 @@ package edu.cmu.arevents;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
+
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class EventResultList extends Activity {
 	static final String TAG = "MACCHA";
@@ -80,6 +79,45 @@ public class EventResultList extends Activity {
 	        		@Override
 	        		public void onItemClick(AdapterView<?> parent, View view,
 	        				int position, long id) {
+	        			
+	        			TextView nameView = ((TextView) view.findViewById(R.id.name));
+	        			String name = nameView.getText().toString();
+	        			
+	        			HashMap<String, String> n2 = eventList.get(position);
+	        			
+	        			for (String key : n2.keySet()) {
+	        				   System.out.println("------------------------------------------------");
+	        				   System.out.println("Iterating or looping map using java5 foreach loop");
+	        				   System.out.println("key: " + key + " value: " + n2.get(key));
+	   	        	   		//Toast.makeText(getApplicationContext(), lat +", " + lon, Toast.LENGTH_LONG).show();
+
+	        			}
+
+
+	        			
+
+	        	   		
+	        			System.out.println("name= " +name + ", n2 = "+n2);
+	        			
+	        			
+//	        			for (HashMap<String, String> map : eventList){
+//	        				for (Entry<String, String> entry : map.entrySet()){
+//	        					
+//		        					System.out.println(entry.getKey() + " => " + entry.getValue());
+//
+//	        					
+//	        				}
+//	        			         
+//	        			}
+	        			     
+	        			
+	        			
+//	        			Intent newActivity = new Intent(EventResultList.this, EventInfoActivity.class);     
+//	        			intent.putExtra("full_json_string",full_json_string);
+//	        			Object s = list.getItemAtPosition(position);
+//	        			
+//	        			startActivity(newActivity);
+	        			
 
 	        		}
 	        	});		

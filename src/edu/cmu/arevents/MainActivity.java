@@ -146,13 +146,13 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 	s_keyword = keywordText.getText().toString();
 	
 	
-	RadioGroup rg=(RadioGroup)findViewById(R.id.radioDistanceGroup);
-	RadioButton b_within =  (RadioButton)this.findViewById(rg.getCheckedRadioButtonId());
-	s_within = b_within.getText().toString();
-	
-	RadioGroup rg2=(RadioGroup)findViewById(R.id.radioTimeGroup);
-	RadioButton b_date =  (RadioButton)this.findViewById(rg2.getCheckedRadioButtonId());
-	s_date = b_date.getText().toString();
+//	RadioGroup rg=(RadioGroup)findViewById(R.id.radioDistanceGroup);
+//	RadioButton b_within =  (RadioButton)this.findViewById(rg.getCheckedRadioButtonId());
+//	s_within = b_within.getText().toString();
+//	
+//	RadioGroup rg2=(RadioGroup)findViewById(R.id.radioTimeGroup);
+//	RadioButton b_date =  (RadioButton)this.findViewById(rg2.getCheckedRadioButtonId());
+//	s_date = b_date.getText().toString();
 	
 //	int distId = rDistanceGroup.getCheckedRadioButtonId(); 
 //	distanceButton = (RadioButton) findViewById(distId);
@@ -217,8 +217,8 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		callURL = "http://api.eventful.com/json/events/search?app_key=test_key" +
 				"&where="+s_lat +","+s_long+
 				"&keywords=" + s_keyword +
-				"&within=" +s_within+
-				"&date=" +s_date +
+				"&within=5" +
+				"&date=This+Week"+
 				"&category=performing_arts";
 
 		System.out.println("URL being used: " + callURL);
