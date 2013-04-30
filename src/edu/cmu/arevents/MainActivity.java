@@ -45,6 +45,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private static final String TAG_CITY = "city_name";
 	private static final String TAG_IMAGE = "image";
 
+	private static JSONObject json;
+	private String full_json_string;
 	 
 	// events JSONArray
 	JSONArray events = null;
@@ -91,7 +93,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	new LongRunningGetIO().execute();
 	}
 
-	 private OnClickListener search_button_listen = new OnClickListener(){
+	 /*private OnClickListener search_button_listen = new OnClickListener(){
 	    	@Override
 	    	public void onClick(View v) {
 	    
@@ -99,7 +101,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	    		JSONParser jParser = new JSONParser();
 	    		 
 	    		// getting JSON string from URL
-	    		JSONObject json = jParser.getJSONFromUrl(callURL);
+	    		json = jParser.getJSONFromUrl(callURL);
 	    		
 	    		String jsonstring = json.toString();
 	    		Log.d("JSON PARSER: ", jsonstring);
@@ -137,6 +139,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	    		}
 	        }
 	    };
+	    
+	    */
 	    
 	 private OnClickListener curr_location_listen = new OnClickListener(){
 	    	@Override
@@ -207,10 +211,26 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		String jsonstring = json.toString();
 		Log.d("JSON PARSER: ", jsonstring);
 		
+		
+		int startIndex = jsonstring.indexOf("{\"event\"");
+    	jsonstring = jsonstring.substring(startIndex, jsonstring.length()-1);
     	Toast.makeText(getApplicationContext(), jsonstring, Toast.LENGTH_LONG).show();
+    	
+    	Log.d("JSON PARSER: ", jsonstring);
+		
+    	//Toast.makeText(getApplicationContext(), jsonstring, Toast.LENGTH_LONG).show();
 
-		 
+    	full_json_string = jsonstring;
+		
 		try {
+			
+			json = new JSONObject(jsonstring);
+			
+			boolean hasEvents = json.has("event");
+	    	
+	    	
+	    	Toast.makeText(getApplicationContext(), "event: "+hasEvents, Toast.LENGTH_LONG).show();
+
 		    // Getting Array of Contacts
 		    events = json.getJSONArray(TAG_EVENT);
 		     
@@ -229,7 +249,8 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		        String city = c.getString(TAG_CITY);
 		         
 		        // Phone number is agin JSON Object
-		        JSONObject image = c.getJSONObject(TAG_IMAGE);
+		       // JSONObject image = c.getJSONObject(TAG_IMAGE);
+		        
 		        //String mobile = phone.getString(TAG_PHONE_MOBILE);
 //		        String home = phone.getString(TAG_PHONE_HOME);
 //		        String office = phone.getString(TAG_PHONE_OFFICE);
@@ -238,8 +259,14 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		} catch (JSONException e) {
 		    e.printStackTrace();
 		}
-		Intent intent = new Intent(MainActivity.this, AndroidJSONParsingActivity.class); 
+		
+		
+		Intent intent = new Intent(MainActivity.this, ActiveBidsActivity.class); 
+		intent.putExtra("full_json_string",full_json_string);
     	startActivity(intent);
+    	
+    	
+    	
 		
 //		EditText et = (EditText)findViewById(R.id.locationText);
 //		et.setText(results);
@@ -248,6 +275,12 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 	searchB.setClickable(true);
 	}
 }
+
+
+
+	public static JSONObject getJSONObject(){
+		return MainActivity.json;
+	}
 }
 
 

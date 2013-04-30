@@ -2,15 +2,15 @@ package edu.cmu.arevents;
 
 import java.util.ArrayList;
 import java.util.HashMap;
- 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
- 
+
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -42,6 +42,7 @@ public class AndroidJSONParsingActivity extends ListActivity {
 	private static final String TAG_CITY = "city_name";
 	private static final String TAG_IMAGE = "image";
 
+	
 	 
 	// events JSONArray
 	JSONArray events = null;
@@ -58,7 +59,7 @@ public class AndroidJSONParsingActivity extends ListActivity {
         JSONParser jParser = new JSONParser();
  
         // getting JSON string from URL
-        JSONObject json = jParser.getJSONFromUrl(callURL);
+        JSONObject json = MainActivity.getJSONObject(); //jParser.getJSONFromUrl(callURL);
  
         try {
             // Getting Array of Contacts
