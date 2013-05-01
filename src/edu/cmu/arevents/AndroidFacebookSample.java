@@ -19,10 +19,11 @@ import android.widget.Toast;
 
 public class AndroidFacebookSample extends Activity {
 
+//	9YEp7yDvObD4qlzrrW9GPYOJE=
 	private static final String FACEBOOK_APPID = "508940955838854";
 	private static final String FACEBOOK_PERMISSION = "publish_stream";
 	private static final String TAG = "FacebookSample";
-	private static String postMsg = "I found this cool event. Wanna join? ";
+	private static String postMsg = "Wanna join me for this event? ";
 	
 	private final Handler mFacebookHandler = new Handler();
 	private TextView loginStatus;
@@ -38,8 +39,13 @@ public class AndroidFacebookSample extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fb_main);
+        
         this.facebookConnector = new FacebookConnector(FACEBOOK_APPID, this, getApplicationContext(), new String[] {FACEBOOK_PERMISSION});
         
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            postMsg = postMsg + extras.getString("info");
+        }
 
         loginStatus = (TextView)findViewById(R.id.login_status);
         Button tweet = (Button) findViewById(R.id.btn_post);
@@ -82,7 +88,7 @@ public class AndroidFacebookSample extends Activity {
 	
 
 	private String getFacebookMsg() {
-		return postMsg + " at " + new Date().toLocaleString();
+		return postMsg;// + " " + new Date().toLocaleString();
 	}	
 	
 	public void postMessage() {

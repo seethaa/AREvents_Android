@@ -18,10 +18,7 @@
         android:layout_height="wrap_content" >
     </LinearLayout>
 
-    <TableRow
-        android:id="@+id/tableRow1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+ 
 
         <TextView
             android:id="@+id/textView2"
@@ -42,12 +39,8 @@
         </EditText>
 
 
-    </TableRow>
 
-     <TableRow
-        android:id="@+id/tableRow1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    
 
         <TextView
             android:id="@+id/keywordLabel"
@@ -68,7 +61,7 @@
         </EditText>
 
 
-    </TableRow>
+
     
     <TextView
         android:id="@+id/textView2"
@@ -78,25 +71,20 @@
         android:paddingTop="15dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:paddingTop="15dp">
 
-        <TableRow
-            android:id="@+id/tableRow2"
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-            
-              <RadioGroup
+             <RadioGroup
 		        android:id="@+id/radioDistanceGroup"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content" >
-    
-                  
+             
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
                 <RadioButton
@@ -113,24 +101,29 @@
                     android:text="5mi" />
 
                 <RadioButton
-                android:id="@+id/tenMile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10mi" />
+                    android:id="@+id/tenMile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10mi" />
 
-            	<RadioButton
-                android:id="@+id/twentyMile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20mi" />
-            	
+                <RadioButton
+                    android:id="@+id/twentyMile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="20mi" />
+
             </LinearLayout>
+                 
+          </RadioGroup>
+
+        </LinearLayout>
+
+
 
             
-
-              </RadioGroup>
+             
     
-        </TableRow>
+       
 
         <TextView
             android:id="@+id/textView2"
@@ -140,17 +133,11 @@
             android:text="Time:"
             android:textAppearance="?android:attr/textAppearanceMedium" />
         
-    </TableLayout>
-    
-      <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:paddingTop="15dp">
 
-        <TableRow
-            android:id="@+id/tableRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+    
+ 
+
+
 
             <RadioGroup
 	        android:id="@+id/radioTimeGroup"
@@ -185,10 +172,8 @@
 
 
             </RadioGroup>
-        </TableRow>
-
+    
      
-    </TableLayout>
 
       <LinearLayout
           android:layout_width="match_parent"
