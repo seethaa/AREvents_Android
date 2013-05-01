@@ -254,9 +254,9 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		}
 		
 		String jsonstring = json.toString();
-		Log.d("JSON PARSER: ", jsonstring);
+		//Log.d("JSON PARSER: ", jsonstring);
 		
-		Toast.makeText(getApplicationContext(), jsonstring, Toast.LENGTH_LONG).show();
+//		Toast.makeText(getApplicationContext(), jsonstring, Toast.LENGTH_LONG).show();
 		
 		
 		int startIndex = jsonstring.indexOf("{\"event\"");
@@ -267,6 +267,29 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		else{
 			jsonstring = "";
 		}
+	
+		
+		int startIndex2 = jsonstring.indexOf("\"image\":");
+		String imgStr = null;
+		
+		if (startIndex2!= -1){
+			imgStr = jsonstring.substring(startIndex2, jsonstring.length()-1);
+			int urlIndex = imgStr.indexOf("\"url\":");
+			
+			
+			if (urlIndex!=-1){
+				imgStr = imgStr.substring(urlIndex+6);
+				
+				int htIndex = imgStr.indexOf(",\"height\":");
+				imgStr = imgStr.substring(0,htIndex);
+			}
+		}
+		else{
+			imgStr = "";
+		}
+		
+		//Toast.makeText(getApplicationContext(), imgStr, Toast.LENGTH_LONG).show();
+		Log.d("IMG PARSED: ", imgStr);
 		
 		//Toast.makeText(getApplicationContext(), jsonstring, Toast.LENGTH_LONG).show();
     	
@@ -276,7 +299,7 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 
     	full_json_string = jsonstring;
 		
-		try {
+		/*try {
 			
 			json = new JSONObject(jsonstring);
 			
@@ -285,7 +308,7 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 	    	
 	    	//Toast.makeText(getApplicationContext(), "event: "+hasEvents, Toast.LENGTH_LONG).show();
 
-		    // Getting Array of Contacts
+		    // Getting Array of events
 		    events = json.getJSONArray(TAG_EVENT);
 		     
 		    // looping through All Contacts
@@ -302,19 +325,19 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		        String description = c.getString(TAG_DESCRIPTION);
 		        String city = c.getString(TAG_CITY);
 		         
-		        // Phone number is agin JSON Object
-		       // JSONObject image = c.getJSONObject(TAG_IMAGE);
+		        // image is again JSON Object
+		        JSONObject image = c.getJSONObject(TAG_IMAGE);
+		        String img_url = image.getString("url");
 		        
-		        //String mobile = phone.getString(TAG_PHONE_MOBILE);
-//		        String home = phone.getString(TAG_PHONE_HOME);
-//		        String office = phone.getString(TAG_PHONE_OFFICE);
+		     //   Toast.makeText(getApplicationContext(), "image url: "+img_url, Toast.LENGTH_LONG).show();
+
 		         
 		    }
 		} catch (JSONException e) {
 	   		Toast.makeText(getApplicationContext(), "No Events found with this criteria!", Toast.LENGTH_LONG).show();
 
 		    e.printStackTrace();
-		}
+		} */
 		
 		
 		Intent intent = new Intent(MainActivity.this, EventResultList.class); 

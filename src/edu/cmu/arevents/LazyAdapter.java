@@ -1,18 +1,14 @@
 package edu.cmu.arevents;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.TimeZone;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,14 +84,25 @@ public class LazyAdapter extends ArrayAdapter<HashMap<String, String>> {
       
         address.setText(addr);
       
-//	    	imageLoader.DisplayImage("http://ibmsmartercommerce.sourceforge.net/wp-content/uploads/2012/09/Roses_Bunch_Of_Flowers.jpeg", thumb_image);
+      Drawable d = LoadImageFromWebOperations(item.get(EventResultList.TAG_IMAGE));
+      thumb_image.setImageDrawable(d);
+//        imageLoader.DisplayImage("http://japanese.pages.tcnj.edu/files/2011/09/Maccha_200.jpg", thumb_image);
+//        imageLoader.DisplayImage(EventResultList.TAG_IMAGE, thumb_image);
 
-//        imageLoader.DisplayImage("http://"+localURL+":3000/"+item.get(ActiveBidsActivity.KEY_THUMB_URL), thumb_image);
-        imageLoader.DisplayImage("http://japanese.pages.tcnj.edu/files/2011/09/Maccha_200.jpg", thumb_image);
-        
-//        imageLoader.DisplayImage("http://10.0.2.2:3000"+"/system/items/pictures/000/000/004/original/Autumn.jpg?1354124701", thumb_image);
 		
 	}
 
+	private Drawable LoadImageFromWebOperations(String strPhotoUrl) 
+    {
+        try
+        {
+        InputStream is = (InputStream) new URL(strPhotoUrl).getContent();
+        Drawable d = Drawable.createFromStream(is, "src name");
+        return d;
+        }catch (Exception e) {
+        System.out.println("Exc="+e);
+        return null;
+        }
+    }
 	
 }

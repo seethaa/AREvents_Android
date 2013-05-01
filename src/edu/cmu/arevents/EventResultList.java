@@ -187,29 +187,17 @@ public class EventResultList extends Activity {
 	{
 
 		super.onPause();
-		updateEvents();
-		this.adapter.notifyDataSetChanged();
-		
+	
 	}
 
 	@Override
 	protected void onStop()
 	{
 		super.onStop();
-		updateEvents();
-		this.adapter.notifyDataSetChanged();
 		
 	}
     
-   // @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                NavUtils.navigateUpFromSameTask(this);
-//                return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+
     
     private void updateEvents(){
 
@@ -234,9 +222,21 @@ public class EventResultList extends Activity {
 		        String description = c.getString(TAG_DESCRIPTION);
 		        String city = c.getString(TAG_CITY);
 		         
-		        // Phone number is agin JSON Object
-		       // JSONObject image = c.getJSONObject(TAG_IMAGE);
-		        String image_url = "http://japanese.pages.tcnj.edu/files/2011/09/Maccha_200.jpg";//image.getString("url");
+		     // image is again JSON Object
+		        JSONObject image = c.getJSONObject(TAG_IMAGE);
+		        String img_url = image.getString("url");
+		        
+		        Toast.makeText(getApplicationContext(), "image url: "+img_url, Toast.LENGTH_LONG).show();
+		   
+		        // image is again JSON Object
+//		        String imgTxt = c.getString(TAG_IMAGE);
+//		        
+//		        System.out.println("img text is: "+imgTxt);
+//		        JSONObject imgJson = new JSONObject(imgTxt);
+//		        
+//		        String image_url = imgJson.getString("url");
+		        
+		        //String image_url = "http://japanese.pages.tcnj.edu/files/2011/09/Maccha_200.jpg";//image.getString("url");
                 
                 // creating new HashMap
                 HashMap<String, String> map = new HashMap<String, String>();
@@ -249,7 +249,7 @@ public class EventResultList extends Activity {
                 map.put(TAG_TITLE, title);
                 map.put(TAG_DESCRIPTION, description);
                 map.put(TAG_CITY, city);
-                map.put(TAG_IMAGE, image_url);
+                map.put(TAG_IMAGE, img_url);
  
                 // adding HashList to ArrayList
                 eventList.add(map);
