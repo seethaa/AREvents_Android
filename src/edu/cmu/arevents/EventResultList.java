@@ -177,8 +177,8 @@ public class EventResultList extends Activity {
 	protected void onResume()
 	{
 		super.onResume();
-		updateEvents();
-		this.adapter.notifyDataSetChanged();
+//		updateEvents();
+//		this.adapter.notifyDataSetChanged();
 	
 	}
 
@@ -222,12 +222,39 @@ public class EventResultList extends Activity {
 		        String description = c.getString(TAG_DESCRIPTION);
 		        String city = c.getString(TAG_CITY);
 		         
+		        int startIndex2 = full_json_string.indexOf("\"image\":");
+				String imgStr = null;
+				
+				if (startIndex2!= -1){
+					imgStr = full_json_string.substring(startIndex2, full_json_string.length()-1);
+					int urlIndex = imgStr.indexOf("\"url\":");
+					
+					
+					if (urlIndex!=-1){
+						imgStr = imgStr.substring(urlIndex+6);
+						
+						int htIndex = imgStr.indexOf(",\"height\":");
+						imgStr = imgStr.substring(0,htIndex);
+					}
+				}
+				else{
+					imgStr = "";
+				}
+				
 		     // image is again JSON Object
-		        JSONObject image = c.getJSONObject(TAG_IMAGE);
-		        String img_url = image.getString("url");
+//		        JSONObject image = c.getJSONObject(TAG_IMAGE);
+		        String img_url = "";
+//		        if (image!= null){
+//		        	img_url = image.getString("url");
+//		        	
+//		        }
 		        
-		        Toast.makeText(getApplicationContext(), "image url: "+img_url, Toast.LENGTH_LONG).show();
-		   
+		        img_url = imgStr.substring(1,imgStr.length()-1);
+		        img_url = img_url.replaceAll("\\\\", "");
+		        System.out.println("URL Used for Image: "+img_url);
+		        
+		       // Toast.makeText(getApplicationContext(), "image url: "+img_url, Toast.LENGTH_LONG).show();
+		       
 		        // image is again JSON Object
 //		        String imgTxt = c.getString(TAG_IMAGE);
 //		        
@@ -242,6 +269,7 @@ public class EventResultList extends Activity {
                 HashMap<String, String> map = new HashMap<String, String>();
                  
                 // adding each child node to HashMap key => value
+               
                 map.put(TAG_STARTTIME, start_time);
                 map.put(TAG_LAT, latitude);
                 map.put(TAG_LONG, longitude);
@@ -252,6 +280,7 @@ public class EventResultList extends Activity {
                 map.put(TAG_IMAGE, img_url);
  
                 // adding HashList to ArrayList
+                
                 eventList.add(map);
             }
         } catch (JSONException e) {

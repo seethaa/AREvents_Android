@@ -214,12 +214,21 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpContext localContext = new BasicHttpContext();
 		
+		if (s_keyword.equals("")){
+			callURL = "http://api.eventful.com/json/events/search?app_key=test_key" +
+					"&where="+s_lat +","+s_long+
+					"&within=5" +
+					"&date=This+Week"+
+					"&category=performing_arts";
+		}
+		else{
 		callURL = "http://api.eventful.com/json/events/search?app_key=test_key" +
 				"&where="+s_lat +","+s_long+
 				"&keywords=" + s_keyword +
 				"&within=5" +
 				"&date=This+Week"+
 				"&category=performing_arts";
+		}
 
 		System.out.println("URL being used: " + callURL);
 		Log.d("URL being used: ", callURL);
@@ -298,48 +307,7 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
     	//Toast.makeText(getApplicationContext(), jsonstring, Toast.LENGTH_LONG).show();
 
     	full_json_string = jsonstring;
-		
-		/*try {
-			
-			json = new JSONObject(jsonstring);
-			
-			boolean hasEvents = json.has("event");
-	    	
-	    	
-	    	//Toast.makeText(getApplicationContext(), "event: "+hasEvents, Toast.LENGTH_LONG).show();
-
-		    // Getting Array of events
-		    events = json.getJSONArray(TAG_EVENT);
-		     
-		    // looping through All Contacts
-		    for(int i = 0; i < events.length(); i++){
-		        JSONObject c = events.getJSONObject(i);
-		         
-		       
-		        // Storing each json item in variable
-		        String start_time = c.getString(TAG_STARTTIME);
-		        String latitude = c.getString(TAG_LAT);
-		        String longitude = c.getString(TAG_LONG);
-		        String address = c.getString(TAG_ADDRESS);
-		        String title = c.getString(TAG_TITLE);
-		        String description = c.getString(TAG_DESCRIPTION);
-		        String city = c.getString(TAG_CITY);
-		         
-		        // image is again JSON Object
-		        JSONObject image = c.getJSONObject(TAG_IMAGE);
-		        String img_url = image.getString("url");
-		        
-		     //   Toast.makeText(getApplicationContext(), "image url: "+img_url, Toast.LENGTH_LONG).show();
-
-		         
-		    }
-		} catch (JSONException e) {
-	   		Toast.makeText(getApplicationContext(), "No Events found with this criteria!", Toast.LENGTH_LONG).show();
-
-		    e.printStackTrace();
-		} */
-		
-		
+	
 		Intent intent = new Intent(MainActivity.this, EventResultList.class); 
 		intent.putExtra("full_json_string",full_json_string);
     	startActivity(intent);
