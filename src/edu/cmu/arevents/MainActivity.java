@@ -91,7 +91,7 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 	 rTimeGroup = (RadioGroup) this.findViewById(R.id.radioTimeGroup);
 
      
-     EditText locationText = (EditText) this.findViewById(R.id.locationText);
+     //EditText locationText = (EditText) this.findViewById(R.id.locationText);
      //locationText.setOnClickListener(curr_location_listen);  
      
      keywordText = (EditText) this.findViewById(R.id.keywordText);
@@ -127,8 +127,8 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 	   s_lat = lat;
 	   s_long = lon;
 	   
-	   EditText locationText = (EditText) this.findViewById(R.id.locationText);
-	   locationText.setText(lat +", " + lon);
+	  // EditText locationText = (EditText) this.findViewById(R.id.locationText);
+	 //  locationText.setText(lat +", " + lon);
 	   
 	   Log.d("LOCATION: ", lat +", " + lon);
    		Toast.makeText(getApplicationContext(), lat +", " + lon, Toast.LENGTH_LONG).show();
@@ -153,24 +153,29 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 //	RadioGroup rg2=(RadioGroup)findViewById(R.id.radioTimeGroup);
 //	RadioButton b_date =  (RadioButton)this.findViewById(rg2.getCheckedRadioButtonId());
 //	s_date = b_date.getText().toString();
-	
-//	int distId = rDistanceGroup.getCheckedRadioButtonId(); 
-//	distanceButton = (RadioButton) findViewById(distId);
-//	s_within = (String) distanceButton.getText();
 //	
-//	 int timeId = rTimeGroup.getCheckedRadioButtonId();
-//	 timeButton = (RadioButton) findViewById(timeId);
-//	 s_date = (String) timeButton.getText();
-	 
-	 if (s_date.equalsIgnoreCase("This Week")){
-		 s_date = "This+Week";
-	 }else if (s_date.equalsIgnoreCase("This Month")){
-		 s_date = "This+Month";
-	 }else if (s_date.equalsIgnoreCase("Today")){
-		 s_date = "Today";
-	 }
+	int distId = rDistanceGroup.getCheckedRadioButtonId(); 
+	distanceButton = (RadioButton) findViewById(distId);
+	s_within = (String) distanceButton.getText();
+	s_within = s_within.substring(0,s_within.length()-2);
+	
+	
+	 int timeId = rTimeGroup.getCheckedRadioButtonId();
+	 timeButton = (RadioButton) findViewById(timeId);
+	 s_date = (String) timeButton.getText();
 	 
 	 System.out.println("distance and date: "+s_within + ","+ s_date);
+
+	 s_date = s_date.trim();
+	 s_date = s_date.replace(" ", "+");
+//	 if (s_date.equalsIgnoreCase("This Week")){
+//		 s_date = "This+Week";
+//	 }else if (s_date.equalsIgnoreCase("Next Week")){
+//		 s_date = "Next+Week";
+//	 }else if (s_date.equalsIgnoreCase("Today")){
+//		 s_date = "Today";
+//	 }
+	 
 	//s_category = 
 			
 	new LongRunningGetIO().execute();
@@ -217,16 +222,16 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 		if (s_keyword.equals("")){
 			callURL = "http://api.eventful.com/json/events/search?app_key=test_key" +
 					"&where="+s_lat +","+s_long+
-					"&within=5" +
-					"&date=This+Week"+
+					"&within=" + s_within+
+					"&date=" + s_date +
 					"&category=performing_arts";
 		}
 		else{
 		callURL = "http://api.eventful.com/json/events/search?app_key=test_key" +
 				"&where="+s_lat +","+s_long+
 				"&keywords=" + s_keyword +
-				"&within=5" +
-				"&date=This+Week"+
+				"&within=" + s_within+
+				"&date=" + s_date +
 				"&category=performing_arts";
 		}
 

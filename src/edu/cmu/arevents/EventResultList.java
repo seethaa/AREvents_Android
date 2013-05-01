@@ -96,8 +96,8 @@ public class EventResultList extends Activity {
 	        				   System.out.println("------------------------------------------------");
 	        				   System.out.println("key: " + key + " value: " + n2.get(key));
 	        			
-	   	        	Intent intent = new Intent(EventResultList.this, EventInfoActivity.class);
-	   	        	Bundle mBundle = new Bundle();
+			   	        	Intent intent = new Intent(EventResultList.this, EventInfoActivity.class);
+			   	        	Bundle mBundle = new Bundle();
 	   	        	
 	   	        	
 	   	        	
@@ -126,12 +126,14 @@ public class EventResultList extends Activity {
 	   	        				intent.putExtra("start_time", st_time);
 	   	        				mBundle.putString("start_time", st_time);
 	   	        			}
-	   	        			if (key.equalsIgnoreCase("image")){
-	   	        				details = details + "start: " +n2.get(key) + ", ";
-	   	        				 imgURL = n2.get(key) +"";
-	   	        				intent.putExtra("start_time", imgURL);
-	   	        				mBundle.putString("start_time", imgURL);
-	   	        			}
+//	   	        			if (key.equalsIgnoreCase("image")){
+//	   	        				details = details + "start: " +n2.get(key) + ", ";
+//	   	        				 imgURL = n2.get(key) +"";
+//	   	        				intent.putExtra("start_time", imgURL);
+//	   	        				mBundle.putString("start_time", imgURL);
+//	   	        			}
+	   	        			
+	   	        			imgURL ="";
 	   	        			//mBundle.putString("details", details);
 	   	        			
 

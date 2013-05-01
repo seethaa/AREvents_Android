@@ -45,8 +45,8 @@ public class EventInfoActivity extends Activity {
 
     	thumb_image = (ImageView) this.findViewById(R.id.list_image);
     	
-   		Toast.makeText(getApplicationContext(), title + ", " + address + ", " + description
-   				+ ", "+ start_time, Toast.LENGTH_LONG).show();
+//   		Toast.makeText(getApplicationContext(), title + ", " + address + ", " + description
+//   				+ ", "+ start_time, Toast.LENGTH_LONG).show();
 
     	
    	 Drawable d = LoadImageFromWebOperations(imgURL);
