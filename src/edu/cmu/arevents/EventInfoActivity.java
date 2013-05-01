@@ -18,6 +18,7 @@ public class EventInfoActivity extends Activity {
 	private Button fbButton;
 	private Button calButton;
 	private String details;
+	private String imgURL;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class EventInfoActivity extends Activity {
     	address = EventResultList.addr;// extras.getString("address");
     	description = EventResultList.descr; //extras.getString("description");
     	start_time = EventResultList.st_time;// extras.getString("start_time");
+    	imgURL = EventResultList.imgURL;
     	//details = extras.getString("details");
 	   // Toast.makeText(getApplicationContext(), details, Toast.LENGTH_LONG).show();
 
@@ -96,8 +98,8 @@ public class EventInfoActivity extends Activity {
 	    	@Override
 	    	public void onClick(View v) {
 	    
-		        	//Intent intent = new Intent(MainActivity.this, TakePhoto.class); 
-		        	//startActivity(intent);
+	    		Intent intent = new Intent(EventInfoActivity.this, AndroidFacebookSample.class); 
+		        startActivity(intent);
 
 	        }
 	    };

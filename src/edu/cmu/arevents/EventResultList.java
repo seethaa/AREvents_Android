@@ -39,6 +39,7 @@ public class EventResultList extends Activity {
 		 static String addr;
 		 static String st_time;
 		 static String descr;
+		 static String imgURL;
 		 
 		ListView list;
 	    LazyAdapter adapter;
@@ -124,6 +125,12 @@ public class EventResultList extends Activity {
 	   	        				 st_time = n2.get(key) +"";
 	   	        				intent.putExtra("start_time", st_time);
 	   	        				mBundle.putString("start_time", st_time);
+	   	        			}
+	   	        			if (key.equalsIgnoreCase("image")){
+	   	        				details = details + "start: " +n2.get(key) + ", ";
+	   	        				 imgURL = n2.get(key) +"";
+	   	        				intent.putExtra("start_time", imgURL);
+	   	        				mBundle.putString("start_time", imgURL);
 	   	        			}
 	   	        			//mBundle.putString("details", details);
 	   	        			
