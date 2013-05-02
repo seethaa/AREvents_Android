@@ -115,6 +115,7 @@ public class EventInfoActivity extends Activity {
 	    return noHTMLString;
 	}
 	
+	
 	private Drawable LoadImageFromWebOperations(String strPhotoUrl) 
     {
         try
