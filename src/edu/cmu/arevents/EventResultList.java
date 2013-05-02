@@ -40,6 +40,9 @@ public class EventResultList extends Activity {
 		 static String st_time;
 		 static String descr;
 		 static String i_url;
+		 static String city;
+		 static String event_latitude;
+		 static String event_longitude;
 		 
 		ListView list;
 	    LazyAdapter adapter;
@@ -126,6 +129,22 @@ public class EventResultList extends Activity {
 	   	        				intent.putExtra("start_time", st_time);
 	   	        				mBundle.putString("start_time", st_time);
 	   	        			}
+	   	        			if (key.equalsIgnoreCase("city_name")){
+	   	        				details = details + "start: " +n2.get(key) + ", ";
+	   	        				 city = n2.get(key) +"";
+	   	        				intent.putExtra("city", city);
+	   	        				mBundle.putString("city", city);
+	   	        			}
+	   	        			if (key.equalsIgnoreCase("latitude")){
+	   	        				details = details + "start: " +n2.get(key) + ", ";
+	   	        				event_latitude = n2.get(key) +"";
+	   	        			}
+	   	        			if (key.equalsIgnoreCase("longitude")){
+	   	        				details = details + "start: " +n2.get(key) + ", ";
+	   	        				 event_longitude = n2.get(key) +"";
+	   	        			
+	   	        			}
+	   	        			
 //	   	        			if (key.equalsIgnoreCase("image")){
 //	   	        				details = details + "start: " +n2.get(key) + ", ";
 //	   	        				 imgURL = n2.get(key) +"";

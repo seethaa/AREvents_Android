@@ -6,6 +6,7 @@ import java.net.URL;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -27,6 +28,9 @@ public class EventInfoActivity extends Activity {
 	private Button addrButton;
 	private String details;
 	private String imgURL;
+	private String city;
+	private String event_lat;
+	private String event_long;
 	private ImageView thumb_image;
 	
 	@Override
@@ -43,6 +47,10 @@ public class EventInfoActivity extends Activity {
     	description = EventResultList.descr; //extras.getString("description");
     	start_time = EventResultList.st_time;// extras.getString("start_time");
     	imgURL = EventResultList.i_url;
+    	city = EventResultList.city;
+    	event_lat = EventResultList.event_latitude;
+    	event_long = EventResultList.event_longitude;
+    	
     	//details = extras.getString("details");
 	   // Toast.makeText(getApplicationContext(), details, Toast.LENGTH_LONG).show();
 
@@ -151,11 +159,22 @@ public class EventInfoActivity extends Activity {
 	    	@Override
 	    	public void onClick(View v) {
 	    
-//	    		Intent intent = new Intent(EventInfoActivity.this, AndroidFacebookSample.class); 
-//	    		intent.putExtra("info",title +" @ " +start_time);
-//
+	    		String addr = address + "+"+ city;
+	    		Toast.makeText(getApplicationContext(), addr, Toast.LENGTH_LONG).show();
+	    		
+	    		String s_lat = MainActivity.s_lat + "";
+	    		String s_long = MainActivity.s_long + "";
+	    		
+	    		String gps_addr = "http://maps.google.com/maps?saddr="+ s_lat + ","+s_long + "&daddr="+event_lat + ","+event_long;
+	    		
+	    		
+	    		Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
+	    			    Uri.parse(gps_addr));
+	    			startActivity(intent);
+	    			
+//	    		Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+//	    			    Uri.parse("google.navigation:q="+addr));
 //	    		startActivity(intent);
-
 	        }
 	    };
 

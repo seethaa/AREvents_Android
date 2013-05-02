@@ -69,8 +69,8 @@ public class MainActivity extends Activity implements OnClickListener, LocationL
 	private String provider; 
 
 	private String callURL = null;
-	private double s_lat = 0.0;
-	private double s_long = 0.0;
+	static double s_lat = 0.0;
+	static double s_long = 0.0;
 	private String s_keyword = "";
 	private String s_within = "5";
 	private String s_date = "This+Week";
