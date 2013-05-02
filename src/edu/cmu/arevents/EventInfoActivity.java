@@ -7,12 +7,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 public class EventInfoActivity extends Activity {
 
@@ -44,18 +46,15 @@ public class EventInfoActivity extends Activity {
     	//details = extras.getString("details");
 	   // Toast.makeText(getApplicationContext(), details, Toast.LENGTH_LONG).show();
 
-    	thumb_image = (ImageView) this.findViewById(R.id.list_image);
+    	//thumb_image = (ImageView) this.findViewById(R.id.list_image);
     	
 //   		Toast.makeText(getApplicationContext(), title + ", " + address + ", " + description
 //   				+ ", "+ start_time, Toast.LENGTH_LONG).show();
 
     	
-   	 Drawable d = LoadImageFromWebOperations(imgURL);
-     thumb_image.setImageDrawable(d);
-//    }
-//    else{
-//    	Toast.makeText(getApplicationContext(), "extras is null", Toast.LENGTH_LONG).show();
-//    }
+//   	 Drawable d = LoadImageFromWebOperations(imgURL);
+//     thumb_image.setImageDrawable(d);
+
     
       TextView titleText = (TextView) this.findViewById(R.id.title);
 	  titleText.setText(title);
@@ -64,18 +63,48 @@ public class EventInfoActivity extends Activity {
 	  starttimeText.setText(start_time);
 	  
 	  TextView descText = (TextView) this.findViewById(R.id.descrText);
-	  //descText.setText(description);
+	  
+	  description= replaceAll(description,"&quot;","\"");
+
+	  description= replaceAll(description,"&amp;","&");
+
+	  description= replaceAll(description,"&rsquo;","Õ");
+	  
+	  descText.setText(description);
+	  descText.setMovementMethod(new ScrollingMovementMethod());
 	  
 	  fbButton = (Button) this.findViewById(R.id.shareFBButton);
 	  fbButton.setOnClickListener(fb_button_listen); 
     
-	  calButton = (Button) this.findViewById(R.id.addToCalButton);
-	  calButton.setOnClickListener(cal_button_listen); 
+//	  calButton = (Button) this.findViewById(R.id.addToCalButton);
+//	  calButton.setOnClickListener(cal_button_listen); 
 	
 	  addrButton = (Button) this.findViewById(R.id.addressButton);
 	  addrButton.setText(address);
 	  addrButton.setOnClickListener(addr_button_listen); 
              
+	}
+	
+	private String replaceAll(String source, String pattern, String replacement) {
+        if (source == null) {
+            return "";
+        }
+        StringBuffer sb = new StringBuffer();
+        int index;
+        int patIndex = 0;
+        while ((index = source.indexOf(pattern, patIndex)) != -1) {
+            sb.append(source.substring(patIndex, index));
+            sb.append(replacement);
+            patIndex = index + pattern.length();
+        }
+        sb.append(source.substring(patIndex));
+        return sb.toString();
+    }
+	
+	public static String html2text(String html) {
+		
+		String noHTMLString = html.replaceAll("\\<.*?>","");
+	    return noHTMLString;
 	}
 	
 	private Drawable LoadImageFromWebOperations(String strPhotoUrl) 

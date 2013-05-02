@@ -34,34 +34,24 @@
         android:text="00-00-00"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical" >
-        
-         <ImageView
-            android:id="@+id/list_image"
-            android:layout_width="50dip"
-            android:layout_height="50dip"/>
-    </LinearLayout>
+ 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="35dp"
+        android:paddingTop="20dp"
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/eventdetailstext"
+            android:id="@+id/sharetext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:paddingLeft="10dp"
+            android:paddingLeft="30dp"
+            android:text="Share with Friends:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/DarkOrange"
-            android:text="Options" 
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-
+            android:textStyle="bold" />
+        
     </LinearLayout>
 
     <Button
@@ -73,31 +63,21 @@
         android:background="@drawable/btn_gray_orange"
         android:text="Share with Facebook" />
 
-    <Button
-        android:id="@+id/addToCalButton"
-        style="@style/ButtonText"
-        android:layout_width="250dp"
-        android:textSize="20dp"
-        android:layout_height="50dp"
-        android:background="@drawable/btn_gray_orange"
-        android:text="Add to Calendar" />
-    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="35dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingTop="10dp" >
 
         <TextView
             android:id="@+id/optionstext"
             android:layout_width="wrap_content"
-             android:textStyle="bold"
-             android:paddingLeft="10dp"
-            android:textColor="@color/DarkOrange"
             android:layout_height="wrap_content"
-            android:text="Venue"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-
+            android:paddingLeft="30dp"
+            android:text="Navigate By Map:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/DarkOrange"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <Button
@@ -118,8 +98,13 @@
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+             android:paddingTop="15dp"
             android:text="Description:"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textColor="@color/DarkOrange"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
 
     </LinearLayout>
 
@@ -130,6 +115,10 @@
 
         <TextView
             android:id="@+id/descrText"
+            android:paddingLeft="30dp"
+            android:maxLines = "7"
+			android:scrollbars = "vertical"
+            android:textColor="@android:color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="lfajselfkjwelkwe" />
