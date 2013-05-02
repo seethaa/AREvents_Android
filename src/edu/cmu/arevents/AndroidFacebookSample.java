@@ -26,7 +26,7 @@ public class AndroidFacebookSample extends Activity {
 	private static String postMsg = "Wanna join me for this event? ";
 	
 	private final Handler mFacebookHandler = new Handler();
-	private TextView loginStatus;
+//	private TextView loginStatus;
 	private FacebookConnector facebookConnector;
 	
     final Runnable mUpdateFacebookNotification = new Runnable() {
@@ -38,7 +38,7 @@ public class AndroidFacebookSample extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fb_main);
+      //  setContentView(R.layout.fb_main);
         
         this.facebookConnector = new FacebookConnector(FACEBOOK_APPID, this, getApplicationContext(), new String[] {FACEBOOK_PERMISSION});
         
@@ -47,27 +47,34 @@ public class AndroidFacebookSample extends Activity {
             postMsg = postMsg + extras.getString("info");
         }
 
-        loginStatus = (TextView)findViewById(R.id.login_status);
-        Button tweet = (Button) findViewById(R.id.btn_post);
-        Button clearCredentials = (Button) findViewById(R.id.btn_clear_credentials);
-        
-        tweet.setOnClickListener(new View.OnClickListener() {
-        	/**
-        	 * Send a tweet. If the user hasn't authenticated to Tweeter yet, he'll be redirected via a browser
-        	 * to the twitter login page. Once the user authenticated, he'll authorize the Android application to send
-        	 * tweets on the users behalf.
-        	 */
-            public void onClick(View v) {
-        		postMessage();
-            }
-        });
+		postMessage();
 
-        clearCredentials.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	clearCredentials();
-            	updateLoginStatus();
-            }
-        });
+      
+      
+//      loginStatus = (TextView)findViewById(R.id.login_status);
+//      
+//        Button tweet = (Button) findViewById(R.id.btn_post);
+//        Button clearCredentials = (Button) findViewById(R.id.btn_clear_credentials);
+//        
+//        tweet.setOnClickListener(new View.OnClickListener() {
+//        	/**
+//        	 * Send a tweet. If the user hasn't authenticated to Tweeter yet, he'll be redirected via a browser
+//        	 * to the twitter login page. Once the user authenticated, he'll authorize the Android application to send
+//        	 * tweets on the users behalf.
+//        	 */
+//            public void onClick(View v) {
+//        		postMessage();
+//            }
+//        }); 
+//
+//        clearCredentials.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//            	clearCredentials();
+//            	updateLoginStatus();
+//            }
+//        });
+        
+       
 	}
 	
 	@Override
@@ -83,7 +90,7 @@ public class AndroidFacebookSample extends Activity {
 	}
 	
 	public void updateLoginStatus() {
-		loginStatus.setText("Logged into Twitter : " + facebookConnector.getFacebook().isSessionValid());
+		//loginStatus.setText("Logged into Twitter : " + facebookConnector.getFacebook().isSessionValid());
 	}
 	
 

@@ -30,5 +30,12 @@
         <item name="android:paddingBottom">@dimen/button_content_paddingBottom</item>
     </style>
  
+
+  <style name="Theme.Splash" parent="android:Theme">
+    <item name="android:windowBackground">@drawable/ar_splash</item>
+    <item name="android:windowNoTitle">true</item>
+  </style>
+
+
     
 </resources>
