@@ -1,14 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
           android:orientation="vertical" android:layout_width="fill_parent"
-          android:background="@drawable/act_bg4"
+          android:background="@color/ARStandardBlue"
           android:layout_height="fill_parent">
 
-          <ImageView
-              android:id="@+id/splash2"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_gravity="center"
-              android:src="@drawable/ar_splash" />
+    <ImageView
+        android:id="@+id/splash2"
+        android:layout_width="342dp"
+        android:layout_height="593dp"
+        android:src="@drawable/ar_splash_3" />
 
           <TextView android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

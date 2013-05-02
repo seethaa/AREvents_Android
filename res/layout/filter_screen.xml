@@ -3,14 +3,15 @@
 <FrameLayout  
     xmlns:android="http://schemas.android.com/apk/res/android"  
     android:layout_width="fill_parent"  
-    android:background="@drawable/activity_bg"
+    android:background="@color/ARDarkBlue"
     android:padding="4dp"
     android:layout_height="fill_parent">  
 
 <LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/act_bg4"
+    android:background="@color/ARGray"
+    
     android:orientation="vertical" >
 
     <TextView
@@ -18,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="AR Events"
-        android:textColor="@android:color/white"
+        android:textColor="@color/ARDarkBlue"
         android:layout_gravity="center" 
         android:textStyle="bold"
         android:paddingTop="15dp"
@@ -30,25 +31,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Keyword:"
-            android:paddingLeft="10dp"
+            android:textColor="@color/ARGrayTextColor"
+            android:paddingLeft="30dp"
             android:textStyle="bold"
-            android:textColor="@color/DarkOrange"
             android:paddingTop="15dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <EditText
-            android:id="@+id/keywordText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:paddingLeft="45dp"
-            android:text="" >
+            android:paddingLeft="30dp"
+            android:orientation="vertical" >
 
-            <requestFocus />
-        </EditText>
-
-
-
+            <EditText
+                android:id="@+id/keywordText"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingLeft="45dp" />
+        </LinearLayout>
     
     <TextView
         android:id="@+id/textView2"
@@ -56,9 +57,9 @@
         android:layout_height="wrap_content"
         android:text="Distance: "
         android:paddingTop="15dp"
-        android:paddingLeft="10dp"
+        android:textColor="@color/ARGrayTextColor"
+        android:paddingLeft="30dp"
         android:textStyle="bold"
-        android:textColor="@color/DarkOrange"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 
@@ -76,28 +77,28 @@
                      android:id="@+id/oneMile"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:textColor="@android:color/white"
+                     android:textColor="@color/ARGrayTextColor"
                      android:text="1mi" />
 
                  <RadioButton
                      android:id="@+id/fiveMile"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:textColor="@android:color/white"
+                     android:textColor="@color/ARGrayTextColor"
                      android:checked="true"
                      android:text="5mi" />
 
                  <RadioButton
                      android:id="@+id/tenMile"
                      android:layout_width="wrap_content"
-                     android:textColor="@android:color/white"
+                     android:textColor="@color/ARGrayTextColor"
                      android:layout_height="wrap_content"
                      android:text="10mi" />
 
                  <RadioButton
                      android:id="@+id/twentyMile"
                      android:layout_width="wrap_content"
-                     android:textColor="@android:color/white"
+                     android:textColor="@color/ARGrayTextColor"
                      android:layout_height="wrap_content"
                      android:text="20mi" />
           
@@ -109,9 +110,9 @@
             android:layout_height="wrap_content"
             android:paddingTop="15dp"
             android:text="Time:"
-            android:paddingLeft="10dp"
+            android:textColor="@color/ARGrayTextColor"
+            android:paddingLeft="30dp"
             android:textStyle="bold"
-            android:textColor="@color/DarkOrange"
             android:textAppearance="?android:attr/textAppearanceMedium" />
        
 
@@ -128,14 +129,14 @@
                     android:id="@+id/today"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/ARGrayTextColor"
                     android:text="Today" />
 
                 <RadioButton
                     android:id="@+id/thisWeek"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/ARGrayTextColor"
                     android:checked="true"
                     android:text="This Week" />
 
@@ -143,7 +144,7 @@
 	                android:id="@+id/thisMonth"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
-	                android:textColor="@android:color/white"
+	                android:textColor="@color/ARGrayTextColor"
 	                android:text="Next Week" />
 
 
@@ -160,15 +161,16 @@
 
           <Button
               android:id="@+id/searchButton"
+              style="@style/ButtonText"
               android:layout_width="120dp"
               android:layout_height="50dp"
+              android:background="@drawable/btn_ar_blue"
               android:gravity="center"
               android:padding="5dp"
               android:paddingLeft="20dp"
-              android:background="@drawable/btn_gray_orange" 
-              style="@style/ButtonText"
               android:paddingTop="100dp"
               android:text="Search" />
+
       </LinearLayout>
 
      

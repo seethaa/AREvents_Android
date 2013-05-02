@@ -3,7 +3,7 @@
 <FrameLayout  
     xmlns:android="http://schemas.android.com/apk/res/android"  
     android:layout_width="fill_parent"  
-    android:background="@drawable/activity_bg"
+    android:background="@color/ARDarkBlue"
     android:padding="4dp"
     android:layout_height="fill_parent">  
     
@@ -11,14 +11,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:background="@drawable/act_bg4"
+    android:background="@color/ARGray"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
+        android:textColor="@color/ARGrayTextColor"
         android:layout_gravity="center" 
         android:gravity="center_horizontal"
         android:textStyle="bold"
@@ -29,7 +29,7 @@
         android:id="@+id/starttime"
         android:layout_width="wrap_content"
         android:textStyle="bold"
-        android:textColor="@color/Cornsilk"
+        android:textColor="@color/ARLightBlue"
         android:layout_height="wrap_content"
         android:text="00-00-00"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -49,7 +49,7 @@
             android:paddingLeft="30dp"
             android:text="Share with Friends:"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/DarkOrange"
+            android:textColor="@color/ARGrayTextColor"
             android:textStyle="bold" />
         
     </LinearLayout>
@@ -60,7 +60,7 @@
         android:layout_width="250dp"
         android:textSize="20dp"
         android:layout_height="50dp"
-        android:background="@drawable/btn_gray_orange"
+        android:background="@drawable/btn_ar_blue"
         android:text="Share with Facebook" />
 
     <LinearLayout
@@ -76,7 +76,7 @@
             android:paddingLeft="30dp"
             android:text="Navigate By Map:"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/DarkOrange"
+            android:textColor="@color/ARGrayTextColor"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -85,7 +85,7 @@
         style="@style/ButtonText"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:background="@drawable/btn_gray_orange"
+        android:background="@drawable/btn_ar_blue"
         android:text="123 Street, Pittsburgh PA"
         android:textSize="20dp" />
 
@@ -101,7 +101,7 @@
             android:paddingLeft="30dp"
              android:paddingTop="15dp"
             android:text="Description:"
-            android:textColor="@color/DarkOrange"
+            android:textColor="@color/ARGrayTextColor"
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
@@ -118,7 +118,7 @@
             android:paddingLeft="30dp"
             android:maxLines = "7"
 			android:scrollbars = "vertical"
-            android:textColor="@android:color/white"
+            android:textColor="@color/ARLightBlue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="lfajselfkjwelkwe" />

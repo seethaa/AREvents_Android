@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+ <color name="ARGray">#e3e3e3</color>
+ <color name="ARDarkBlue">#093a45</color>
+ <color name="ARLightBlue">#4e92a4</color>
+ <color name="ARStandardBlue">#356470</color>
+ 
+ <color name="ARGrayTextColor">#696969</color>
+ 
+ 
+ 
  <color name="white">#FFFFFF</color>
  <color name="yellow">#FFFF00</color>
  <color name="fuchsia">#FF00FF</color>
