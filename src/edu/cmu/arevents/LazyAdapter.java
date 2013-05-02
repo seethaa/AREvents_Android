@@ -8,6 +8,8 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,13 +87,20 @@ public class LazyAdapter extends ArrayAdapter<HashMap<String, String>> {
         address.setText(addr);
       
       Drawable d = LoadImageFromWebOperations(item.get(EventResultList.TAG_IMAGE));
-      thumb_image.setImageDrawable(d);
+      Drawable f = resize(d);
+      thumb_image.setImageDrawable(f);
 //        imageLoader.DisplayImage("http://japanese.pages.tcnj.edu/files/2011/09/Maccha_200.jpg", thumb_image);
 //        imageLoader.DisplayImage(EventResultList.TAG_IMAGE, thumb_image);
 
 		
 	}
 
+	private Drawable resize(Drawable image) {
+	    Bitmap d = ((BitmapDrawable)image).getBitmap();
+	    Bitmap bitmapOrig = Bitmap.createScaledBitmap(d, 100, 85, false);
+	    return new BitmapDrawable(bitmapOrig);
+	}
+	
 	private Drawable LoadImageFromWebOperations(String strPhotoUrl) 
     {
         try

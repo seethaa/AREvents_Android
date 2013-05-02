@@ -58,7 +58,7 @@
         android:paddingTop="15dp"
         android:paddingLeft="10dp"
         android:textStyle="bold"
-            android:textColor="@color/DarkOrange"
+        android:textColor="@color/DarkOrange"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 

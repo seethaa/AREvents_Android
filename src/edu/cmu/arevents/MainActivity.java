@@ -234,6 +234,8 @@ private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
 				"&date=" + s_date +
 				"&category=performing_arts";
 		}
+		
+//		callURL = "http://api.eventful.com/json/events/search?app_key=test_key&where=37.785834,-122.406417&keywords=concert&within=5&date=This+Week&category=performing_arts";
 
 		System.out.println("URL being used: " + callURL);
 		Log.d("URL being used: ", callURL);

@@ -39,7 +39,7 @@ public class EventResultList extends Activity {
 		 static String addr;
 		 static String st_time;
 		 static String descr;
-		 static String imgURL;
+		 static String i_url;
 		 
 		ListView list;
 	    LazyAdapter adapter;
@@ -96,8 +96,8 @@ public class EventResultList extends Activity {
 	        				   System.out.println("------------------------------------------------");
 	        				   System.out.println("key: " + key + " value: " + n2.get(key));
 	        			
-			   	        	Intent intent = new Intent(EventResultList.this, EventInfoActivity.class);
-			   	        	Bundle mBundle = new Bundle();
+		   	        	Intent intent = new Intent(EventResultList.this, EventInfoActivity.class);
+		   	        	Bundle mBundle = new Bundle();
 	   	        	
 	   	        	
 	   	        	
@@ -133,7 +133,7 @@ public class EventResultList extends Activity {
 //	   	        				mBundle.putString("start_time", imgURL);
 //	   	        			}
 	   	        			
-	   	        			imgURL ="";
+	   	        			
 	   	        			//mBundle.putString("details", details);
 	   	        			
 
@@ -231,43 +231,38 @@ public class EventResultList extends Activity {
 		        String description = c.getString(TAG_DESCRIPTION);
 		        String city = c.getString(TAG_CITY);
 		         
-		        int startIndex2 = full_json_string.indexOf("\"image\":");
-				String imgStr = null;
-				
-				if (startIndex2!= -1){
-					imgStr = full_json_string.substring(startIndex2, full_json_string.length()-1);
-					int urlIndex = imgStr.indexOf("\"url\":");
-					
-					
-					if (urlIndex!=-1){
-						imgStr = imgStr.substring(urlIndex+6);
-						
-						int htIndex = imgStr.indexOf(",\"height\":");
-						imgStr = imgStr.substring(0,htIndex);
-					}
-				}
-				else{
-					imgStr = "";
-				}
-				
-		     // image is again JSON Object
-//		        JSONObject image = c.getJSONObject(TAG_IMAGE);
-		        String img_url = "";
-//		        if (image!= null){
-//		        	img_url = image.getString("url");
-//		        	
-//		        }
-		        
-		        img_url = imgStr.substring(1,imgStr.length()-1);
-		        img_url = img_url.replaceAll("\\\\", "");
-		        System.out.println("URL Used for Image: "+img_url);
+//		        String imgTxt = c.getString(TAG_IMAGE);
+//		        System.out.println("img text is: "+imgTxt);
 		        
 		       // Toast.makeText(getApplicationContext(), "image url: "+img_url, Toast.LENGTH_LONG).show();
 		       
-		        // image is again JSON Object
-//		        String imgTxt = c.getString(TAG_IMAGE);
+//		         image is again JSON Object
+		       // JSONArray im = c.getJSONArray("image");
+		        //JSONObject im2 = im.getJSONObject("medium");
+		        
+		        i_url = "http://c.fixya.net/fixya20/products/e/eventful/118x100/eventful_1614415.jpg";
+		        String imgTxt = c.getString("image");
+				//Toast.makeText(getApplicationContext(), "the image text: "+imgTxt, Toast.LENGTH_LONG).show();
+
+
+		        if (!imgTxt.equalsIgnoreCase("null")){
+//		    		Toast.makeText(getApplicationContext(), "the image text: "+imgTxt, Toast.LENGTH_LONG).show();
+
+			        JSONObject object2 = new JSONObject(imgTxt);
+			        i_url = object2.getString("medium");
+			        JSONObject object3 = new JSONObject(i_url);
+			        i_url = object3.getString("url");
+		        }
+//		        String i_url = "";
+//		        if (im!=null){
+//		        	 i_url = im.getString("url");
+//		        }
+		       
+		        
 //		        
-//		        System.out.println("img text is: "+imgTxt);
+		        System.out.println("img text is: "+imgTxt);
+		        System.out.println("i_url is: "+i_url);
+
 //		        JSONObject imgJson = new JSONObject(imgTxt);
 //		        
 //		        String image_url = imgJson.getString("url");
@@ -286,7 +281,7 @@ public class EventResultList extends Activity {
                 map.put(TAG_TITLE, title);
                 map.put(TAG_DESCRIPTION, description);
                 map.put(TAG_CITY, city);
-                map.put(TAG_IMAGE, img_url);
+                map.put(TAG_IMAGE, i_url);
  
                 // adding HashList to ArrayList
                 

@@ -22,6 +22,7 @@ public class EventInfoActivity extends Activity {
 	private String start_time;
 	private Button fbButton;
 	private Button calButton;
+	private Button addrButton;
 	private String details;
 	private String imgURL;
 	private ImageView thumb_image;
@@ -39,7 +40,7 @@ public class EventInfoActivity extends Activity {
     	address = EventResultList.addr;// extras.getString("address");
     	description = EventResultList.descr; //extras.getString("description");
     	start_time = EventResultList.st_time;// extras.getString("start_time");
-    	imgURL = EventResultList.imgURL;
+    	imgURL = EventResultList.i_url;
     	//details = extras.getString("details");
 	   // Toast.makeText(getApplicationContext(), details, Toast.LENGTH_LONG).show();
 
@@ -70,8 +71,10 @@ public class EventInfoActivity extends Activity {
     
 	  calButton = (Button) this.findViewById(R.id.addToCalButton);
 	  calButton.setOnClickListener(cal_button_listen); 
-	  
 	
+	  addrButton = (Button) this.findViewById(R.id.addressButton);
+	  addrButton.setText(address);
+	  addrButton.setOnClickListener(addr_button_listen); 
              
 	}
 	
@@ -115,6 +118,17 @@ public class EventInfoActivity extends Activity {
 		
 	}
 	
+	 private OnClickListener addr_button_listen = new OnClickListener(){
+	    	@Override
+	    	public void onClick(View v) {
+	    
+//	    		Intent intent = new Intent(EventInfoActivity.this, AndroidFacebookSample.class); 
+//	    		intent.putExtra("info",title +" @ " +start_time);
+//
+//	    		startActivity(intent);
+
+	        }
+	    };
 
 	 private OnClickListener fb_button_listen = new OnClickListener(){
 	    	@Override

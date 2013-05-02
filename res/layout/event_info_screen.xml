@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:layout_gravity="center" 
+        android:gravity="center_horizontal"
         android:textStyle="bold"
         android:text="Default title Text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -65,20 +66,20 @@
 
     <Button
         android:id="@+id/shareFBButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_gray_orange" 
         style="@style/ButtonText"
+        android:layout_width="250dp"
+        android:textSize="20dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_gray_orange"
         android:text="Share with Facebook" />
-
-   
 
     <Button
         android:id="@+id/addToCalButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_gray_orange" 
         style="@style/ButtonText"
+        android:layout_width="250dp"
+        android:textSize="20dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_gray_orange"
         android:text="Add to Calendar" />
     
     <LinearLayout
@@ -101,11 +102,12 @@
 
     <Button
         android:id="@+id/addressButton"
-        android:layout_width="wrap_content"
-        android:background="@drawable/btn_gray_orange" 
         style="@style/ButtonText"
-        android:layout_height="wrap_content"
-        android:text="123 Street, Pittsburgh PA" />
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_gray_orange"
+        android:text="123 Street, Pittsburgh PA"
+        android:textSize="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
