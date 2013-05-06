@@ -1,5 +1,9 @@
 package edu.cmu.arevents;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,14 +13,17 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class EventResultList extends Activity {
 	static final String TAG = "MACCHA";
@@ -46,6 +53,8 @@ public class EventResultList extends Activity {
 		 
 		ListView list;
 	    LazyAdapter adapter;
+	    
+	    private Button arButton;
 		 
 		// events JSONArray
 		JSONArray events = null;
@@ -57,6 +66,10 @@ public class EventResultList extends Activity {
     
         setContentView(R.layout.result_events_list);
         
+        
+        arButton = (Button) this.findViewById(R.id.ar_view_button);
+        arButton.setOnClickListener(ar_button_listen); 
+  	  
         Log.d("TAG", "I got to first active bids activity..");
         addedNames = new ArrayList<String>();
         
@@ -100,7 +113,7 @@ public class EventResultList extends Activity {
 	        				   System.out.println("key: " + key + " value: " + n2.get(key));
 	        			
 		   	        	Intent intent = new Intent(EventResultList.this, EventInfoActivity.class);
-		   	        	Bundle mBundle = new Bundle();
+		   	        	//Bundle mBundle = new Bundle();
 	   	        	
 	   	        	
 	   	        	
@@ -108,15 +121,15 @@ public class EventResultList extends Activity {
 	   	        				details = details + "title: " +n2.get(key) + ", ";
 	   	        				 title = n2.get(key)+"";
 	   	        				
-	   	        				intent.putExtra("title", title);
-	   	        				mBundle.putString("title", title);
+	   	        			//	intent.putExtra("title", title);
+//	   	        				mBundle.putString("title", title);
 	   	        				
 	   	        			}
 	   	        			if (key.equalsIgnoreCase("venue_address")){
 	   	        				details = details + "address: " +n2.get(key) + ", ";
 	   	        				 addr =n2.get(key)+"";
-	   	        				intent.putExtra("address",addr);
-	   	        				mBundle.putString("address",addr);
+	   	        				//intent.putExtra("address",addr);
+//	   	        				mBundle.putString("address",addr);
 	   	        			}
 	   	        			if (key.equalsIgnoreCase("description")){
 	   	        				descr = n2.get(key)+"";
@@ -126,14 +139,14 @@ public class EventResultList extends Activity {
 	   	        			if (key.equalsIgnoreCase("start_time")){
 	   	        				details = details + "start: " +n2.get(key) + ", ";
 	   	        				 st_time = n2.get(key) +"";
-	   	        				intent.putExtra("start_time", st_time);
-	   	        				mBundle.putString("start_time", st_time);
+	   	        				//intent.putExtra("start_time", st_time);
+//	   	        				mBundle.putString("start_time", st_time);
 	   	        			}
 	   	        			if (key.equalsIgnoreCase("city_name")){
 	   	        				details = details + "start: " +n2.get(key) + ", ";
 	   	        				 city = n2.get(key) +"";
-	   	        				intent.putExtra("city", city);
-	   	        				mBundle.putString("city", city);
+	   	        				//intent.putExtra("city", city);
+//	   	        				mBundle.putString("city", city);
 	   	        			}
 	   	        			if (key.equalsIgnoreCase("latitude")){
 	   	        				details = details + "start: " +n2.get(key) + ", ";
@@ -144,62 +157,41 @@ public class EventResultList extends Activity {
 	   	        				 event_longitude = n2.get(key) +"";
 	   	        			
 	   	        			}
-	   	        			
-//	   	        			if (key.equalsIgnoreCase("image")){
-//	   	        				details = details + "start: " +n2.get(key) + ", ";
-//	   	        				 imgURL = n2.get(key) +"";
-//	   	        				intent.putExtra("start_time", imgURL);
-//	   	        				mBundle.putString("start_time", imgURL);
-//	   	        			}
-	   	        			
-	   	        			
-	   	        			//mBundle.putString("details", details);
-	   	        			
+
 
 	   	        			intent.putExtra("details", details);
 	   	        			//intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
+	   	        			intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP); 
+	   	        			intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 	   	        			startActivity(intent);
 	        				   
 	   	        	   		//Toast.makeText(getApplicationContext(), details, Toast.LENGTH_LONG).show();
 
 	        			}
-
-
-	        			
-
-	        	   		
+ 		
 	        			System.out.println("name= " +name + ", n2 = "+n2);
-	        			
-	        			
-//	        			for (HashMap<String, String> map : eventList){
-//	        				for (Entry<String, String> entry : map.entrySet()){
-//	        					
-//		        					System.out.println(entry.getKey() + " => " + entry.getValue());
-//
-//	        					
-//	        				}
-//	        			         
-//	        			}
-	        			     
-	        			
-	        			
-
-	        			
+	        		
 
 	        		}
 	        	});		
 	        	
 	        	this.adapter.notifyDataSetChanged();
-//        setContentView(R.layout.activity_active_bids);
-//        getActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-    }
+
+    private OnClickListener ar_button_listen = new OnClickListener(){
+    	@Override
+    	public void onClick(View v) {
+    
+    		
+    		Intent i = new Intent();
+    		i.setAction(Intent.ACTION_VIEW);
+    		i.setDataAndType(Uri.parse("file:///sdcard/data.JSON"), "application/mixare-json");
+    		startActivity(i); 
+
+        }
+    };
  
     @Override
 	protected void onResume()
@@ -249,16 +241,7 @@ public class EventResultList extends Activity {
 		        String title = c.getString(TAG_TITLE);
 		        String description = c.getString(TAG_DESCRIPTION);
 		        String city = c.getString(TAG_CITY);
-		         
-//		        String imgTxt = c.getString(TAG_IMAGE);
-//		        System.out.println("img text is: "+imgTxt);
-		        
-		       // Toast.makeText(getApplicationContext(), "image url: "+img_url, Toast.LENGTH_LONG).show();
-		       
-//		         image is again JSON Object
-		       // JSONArray im = c.getJSONArray("image");
-		        //JSONObject im2 = im.getJSONObject("medium");
-		        
+
 		        i_url = "http://c.fixya.net/fixya20/products/e/eventful/118x100/eventful_1614415.jpg";
 		        String imgTxt = c.getString("image");
 				//Toast.makeText(getApplicationContext(), "the image text: "+imgTxt, Toast.LENGTH_LONG).show();
@@ -272,22 +255,13 @@ public class EventResultList extends Activity {
 			        JSONObject object3 = new JSONObject(i_url);
 			        i_url = object3.getString("url");
 		        }
-//		        String i_url = "";
-//		        if (im!=null){
-//		        	 i_url = im.getString("url");
-//		        }
-		       
+
 		        
 //		        
 		        System.out.println("img text is: "+imgTxt);
 		        System.out.println("i_url is: "+i_url);
 
-//		        JSONObject imgJson = new JSONObject(imgTxt);
-//		        
-//		        String image_url = imgJson.getString("url");
-		        
-		        //String image_url = "http://japanese.pages.tcnj.edu/files/2011/09/Maccha_200.jpg";//image.getString("url");
-                
+
                 // creating new HashMap
                 HashMap<String, String> map = new HashMap<String, String>();
                  

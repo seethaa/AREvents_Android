@@ -51,6 +51,17 @@ public class EventInfoActivity extends Activity {
     	event_lat = EventResultList.event_latitude;
     	event_long = EventResultList.event_longitude;
     	
+    	
+    	
+    	title = EventResultList.title; //  getIntent().getStringExtra("title");
+    	address = EventResultList.addr;// extras.getString("address");
+    	description = EventResultList.descr; //extras.getString("description");
+    	start_time = EventResultList.st_time;// extras.getString("start_time");
+    	imgURL = EventResultList.i_url;
+    	city = EventResultList.city;
+    	event_lat = EventResultList.event_latitude;
+    	event_long = EventResultList.event_longitude;
+    	
     	//details = extras.getString("details");
 	   // Toast.makeText(getApplicationContext(), details, Toast.LENGTH_LONG).show();
 
@@ -116,18 +127,7 @@ public class EventInfoActivity extends Activity {
 	}
 	
 	
-	private Drawable LoadImageFromWebOperations(String strPhotoUrl) 
-    {
-        try
-        {
-        InputStream is = (InputStream) new URL(strPhotoUrl).getContent();
-        Drawable d = Drawable.createFromStream(is, "src name");
-        return d;
-        }catch (Exception e) {
-        System.out.println("Exc="+e);
-        return null;
-        }
-    }
+	
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -155,6 +155,9 @@ public class EventInfoActivity extends Activity {
 		
 		
 	}
+	
+	
+	
 	
 	 private OnClickListener addr_button_listen = new OnClickListener(){
 	    	@Override
